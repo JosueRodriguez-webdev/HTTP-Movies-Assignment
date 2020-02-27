@@ -9,6 +9,9 @@ function Movie({ addToSavedList }) {
   const [movie, setMovie] = useState(null);
   const match = useRouteMatch();
 
+  let history = useHistory();
+  console.log(history);
+
   const fetchMovie = (id) => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
@@ -24,11 +27,14 @@ function Movie({ addToSavedList }) {
     fetchMovie(match.params.id);
   }, [match.params.id]);
 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    history.push(`/update-movie/${movie.id}`);
+  };
+
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
-
-  let history = useHistory();
 
   return (
     <div className="save-wrapper">
@@ -37,9 +43,10 @@ function Movie({ addToSavedList }) {
       <div className="save-button" onClick={saveMovie}>
         Save
       </div>
-      <button>Update</button>
-      <Route path="/update-movie/:id" component={UpdateMovie} />
-      <Link to="/update-movie/:id"></Link>
+
+      <Link to={`/update-movie/${movie.id}`}>
+        <button onClick={handleUpdate}>Update</button>
+      </Link>
     </div>
   );
 }

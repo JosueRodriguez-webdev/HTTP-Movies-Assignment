@@ -8,9 +8,14 @@ function UpdateMovie() {
     stars: []
   });
 
+  console.log(updateMovie);
+
   const handleChange = (e) => {
     setUpdateMovie({ ...updateMovie, [e.target.name]: e.target.value });
   };
+
+  //make handle submit
+
   return (
     <div>
       <form>
@@ -33,6 +38,8 @@ function UpdateMovie() {
 
         <label htmlFor="stars">star</label>
         <input name="stars" onChange={handleChange} value={updateMovie.stars} />
+
+        <button type="submit">Update Movie</button>
       </form>
     </div>
   );
