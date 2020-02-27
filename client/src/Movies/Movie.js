@@ -31,6 +31,10 @@ function Movie({ addToSavedList }) {
     history.push(`/update-movie/${movie.id}`);
   };
 
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/api/movies/${movie.id}`);
+  };
+
   if (!movie) {
     return <div>Loading movie information...</div>;
   }
@@ -46,6 +50,14 @@ function Movie({ addToSavedList }) {
       <Link to={`/update-movie/${movie.id}`}>
         <button onClick={handleUpdate}>Update</button>
       </Link>
+
+      <button
+        onClick={() => {
+          handleDelete(movie.id);
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 }
