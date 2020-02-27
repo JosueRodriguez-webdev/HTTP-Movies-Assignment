@@ -10,7 +10,6 @@ function Movie({ addToSavedList }) {
   const match = useRouteMatch();
 
   let history = useHistory();
-  console.log(history);
 
   const fetchMovie = (id) => {
     axios
